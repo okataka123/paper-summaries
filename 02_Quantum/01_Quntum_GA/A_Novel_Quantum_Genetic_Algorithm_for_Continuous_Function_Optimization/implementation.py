@@ -1,5 +1,6 @@
 import numpy as np
 from typing import List, Tuple
+from benchmark_functions import BenchmarkFunction
 
 # グレイコード変換関数：2進数をグレイコードへ変換
 def binary_to_gray(binary: int) -> int:
@@ -57,7 +58,10 @@ def fitness_function(x: List[float]) -> float:
         負の2乗誤差(適応度)
     """
     # return -sum((xi - 5)**2 for xi in x)
-    return 10-sum((xi - 5)**2 for xi in x)
+    # return 10-sum((xi - 5)**2 for xi in x)
+    bf = BenchmarkFunction()
+    ret = bf.sphere(x)
+    return ret    
 
 
 # 量子個体クラス
@@ -185,6 +189,8 @@ class NQGA:
         return best_solution, best_fitness  # 最良解とその関数値を返す
 
 def main():
+
+    # F1
     nqga = NQGA()
     solution, value = nqga.optimize()
     print("最適解:", solution)
